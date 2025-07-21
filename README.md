@@ -2,6 +2,13 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+1 Open project folder
+2 open terminal and run command : npm i
+3 in terminal run project command: npm run dev
+4 look localhost://3000 at your Browser
+
+# all dependesies you can see at packaje.json file
+
 First, run the development server:
 
 ```bash
