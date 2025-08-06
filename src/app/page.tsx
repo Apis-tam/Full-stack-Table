@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TablePage } from './TablePage';
 import { Flip, ToastContainer } from 'react-toastify';
 import ErrorBoundary from './components/ErrorBaudary';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ export default function Home() {
 						/>
 					</footer>
 				</div>
+				<ReactQueryDevtools initialIsOpen={false} />
 			</QueryClientProvider>
 		</ErrorBoundary>
 	);

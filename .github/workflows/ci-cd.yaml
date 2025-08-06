@@ -1,0 +1,72 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build project
+        run: npm run build
+
+deploy:
+  needs: build-and-test
+  runs-on: ubuntu-latest
+  if: github.ref == 'refs/heads/main' # Деплой только для main
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      run: |
+        git checkout dev
+        git add .
+        git commit -m "Automated deploy to dev"
+        git push origin dev --force
+    - name: Send email notification on success
+      if: success()
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.EMAIL}}
+        password: ${{ secrets.P }}
+        subject: 'Successful Deployment to Dev - ${{ github.repository }}'
+        to: your-email@example.com
+        from: GitHub Actions <your-email@example.com>
+        body: 'The deployment to the dev environment for ${{ github.repository }} was successful. Commit: ${{ github.sha }}'
+
+    - name: Send email notification on failure
+      if: failure()
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.EMAIL }}
+        password: ${{ secrets.P }}
+        subject: 'Failed Deployment to Dev - ${{ github.repository }}'
+        to: your-email@example.com
+        from: GitHub Actions <your-email@example.com>
+        body: 'The deployment to the dev environment for ${{ github.repository }} failed. Commit: ${{ github.sha }}. Please check the GitHub Actions logs for details.'

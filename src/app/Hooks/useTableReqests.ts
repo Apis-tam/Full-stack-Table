@@ -23,8 +23,9 @@ export const useTableData = () => {
 		isLoading,
 		error,
 	} = useQuery({
-		queryKey: ['data', currentPage],
-		queryFn: () => getReq(params),
+		staleTime: 5 * 60 * 1000,
+		queryKey: ['data', params],
+		queryFn: ({ signal }) => getReq(params, signal),
 	});
 
 	const createData = useMutation({
@@ -32,10 +33,10 @@ export const useTableData = () => {
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['data'] });
 
-			toast('Row Created', { delay: 2000, type: 'success' });
+			toast('Row Created', { type: 'success' });
 		},
 		onError(error) {
-			toast('Error: ' + error.message, { delay: 2000, type: 'error' });
+			toast('Error: ' + error.message, { type: 'error' });
 		},
 	});
 
@@ -51,10 +52,10 @@ export const useTableData = () => {
 		mutationFn: (...args: UpdateReqParams) => updateReq(...args),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['data'] });
-			toast('Row Updated', { delay: 2000, type: 'success' });
+			toast('Row Updated', { type: 'success' });
 		},
 		onError(error) {
-			toast('Error: ' + error.message, { delay: 2000, type: 'error' });
+			toast('Error: ' + error.message, { type: 'error' });
 		},
 	});
 
@@ -62,10 +63,10 @@ export const useTableData = () => {
 		mutationFn: (...args: DeleteReqParams) => deleteReq(...args),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['data'] });
-			toast('Row Deleted', { delay: 2000, type: 'success' });
+			toast('Row Deleted', { type: 'success' });
 		},
 		onError(error) {
-			toast('Error: ' + error.message, { delay: 2000, type: 'error' });
+			toast('Error: ' + error.message, { type: 'error' });
 		},
 	});
 

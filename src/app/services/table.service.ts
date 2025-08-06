@@ -18,51 +18,73 @@ const errorResponse = (res: Response) => {
 	throw new Error(`Update request Error: ${res.status}, ${res.statusText}`);
 };
 
-export const getReq = async (params: GetQueryParams): Promise<DataResponse> => {
+const baseHeaders = {
+	'Content-Type': 'application/json',
+	Authorization: `Bearer ${localStorage.getItem('accessToken') || ''}`,
+	credentials: 'include',
+};
+
+export const getReq = async (params: GetQueryParams, signal: AbortSignal): Promise<DataResponse> => {
 	const queryParams = new URLSearchParams(params);
 
 	const queryString = queryParams.toString();
-
-	const response = await fetch(`${config.url}?${queryString}`);
-	if (!response.ok) {
-		errorResponse(response);
+	try {
+		const response = await fetch(`${config.url}/table?${queryString}`, {
+			headers: { ...baseHeaders },
+			signal,
+		});
+		if (!response.ok) {
+			errorResponse(response);
+		}
+		return response.json();
+	} catch (error) {
+		throw error;
 	}
-	return response.json();
 };
 
 export const createReq = async (data: CreatePostData): Promise<DataResponse> => {
-	const response = await fetch(config.url, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(data),
-	});
-	if (!response.ok) {
-		errorResponse(response);
+	try {
+		const response = await fetch(`${config.url}/table`, {
+			method: 'POST',
+			headers: { ...baseHeaders },
+			body: JSON.stringify(data),
+		});
+		if (!response.ok) {
+			errorResponse(response);
+		}
+		return response.json();
+	} catch (error) {
+		throw error;
 	}
-	return response.json();
 };
 
 export const updateReq = async (data: UpdateReqData): Promise<DataResponse> => {
-	const response = await fetch(`${config.url}/${data.id}`, {
-		method: 'PUT',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(data),
-	});
-	if (!response.ok) {
-		errorResponse(response);
+	try {
+		const response = await fetch(`${config.url}/table/${data.id}`, {
+			method: 'PUT',
+			headers: {
+				...baseHeaders,
+			},
+			body: JSON.stringify(data),
+		});
+		if (!response.ok) {
+			errorResponse(response);
+		}
+		return response.json();
+	} catch (error) {
+		throw error;
 	}
-	return response.json();
 };
 
 export const deleteReq = async (id: string): Promise<void> => {
-	const response = await fetch(`${config.url}/${id}`, {
-		method: 'DELETE',
-	});
-	if (!response.ok) {
-		errorResponse(response);
+	try {
+		const response = await fetch(`${config.url}/table/${id}`, {
+			method: 'DELETE',
+		});
+		if (!response.ok) {
+			errorResponse(response);
+		}
+	} catch (error) {
+		throw error;
 	}
 };

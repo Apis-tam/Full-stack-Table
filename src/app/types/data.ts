@@ -1,5 +1,10 @@
 import { ReactNode } from 'react';
 
+export type ApiError = {
+	message: string;
+	status: string;
+};
+
 export type DataResponse = {
 	message: string;
 	status: string;
@@ -20,3 +25,20 @@ export type Data = {
 };
 
 export type CellProps = { item: ReactNode; column: keyof Data; rowIndex: number; cellIndex: number; rowId: string };
+
+export type User = {
+	userName: string;
+	password: string;
+	email: string;
+};
+
+export type AccessResponse = {
+	accessToken: string;
+	refreshToken: string;
+};
+
+export type AuthUserResponse = {
+	data: AccessResponse;
+	message: string;
+	status: string;
+};

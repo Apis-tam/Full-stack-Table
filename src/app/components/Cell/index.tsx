@@ -35,7 +35,7 @@ export const Cell = memo(({ item, rowIndex, cellIndex, isEditble, column, onChan
 
 	return (
 		<div key={`${item}-${column}-${rowId}`} data-index={`row-${rowIndex}-cell-${cellIndex}`} className='p-1 flex  align-middle'>
-			{dateColumns.includes(column) ? new Date(item as string).toDateString() : item}
+			{dateColumns.includes(column) ? new Date(item as string).toLocaleDateString() : item}
 		</div>
 	);
 });
