@@ -1,3 +1,4 @@
+'use client';
 import { useMutation } from '@tanstack/react-query';
 import { useState, useActionState } from 'react';
 import { createUser, signInReq } from '../services/user.service';
@@ -17,16 +18,20 @@ export const useAuth = () => {
 	const create = useMutation({
 		mutationFn: (...arg: CreateUserParams) => createUser(...arg),
 		onSuccess: (res) => {
-			localStorage.setItem('accessToken', res.data.accessToken);
-			//	localStorage.setItem('refreshToken', data.refreshToken);
+			if (typeof window !== 'undefined') {
+				localStorage.setItem('accessToken', res.data.accessToken);
+				//	localStorage.setItem('refreshToken', data.refreshToken);
+			}
 		},
 	});
 
 	const signIn = useMutation({
 		mutationFn: (...arg: SignInUserParams) => signInReq(...arg),
 		onSuccess: (res) => {
-			localStorage.setItem('accessToken', res.data.accessToken);
-			//	localStorage.setItem('refreshToken', data.refreshToken);
+			if (typeof window !== 'undefined') {
+				localStorage.setItem('accessToken', res.data.accessToken);
+				//	localStorage.setItem('refreshToken', data.refreshToken);
+			}
 			if (res.status === 'success') {
 				router.push('/');
 			}
