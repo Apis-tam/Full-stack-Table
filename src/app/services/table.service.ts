@@ -1,3 +1,4 @@
+'use client';
 import { config } from '../../../envConfig';
 import { Data, DataResponse } from '../types/data';
 
