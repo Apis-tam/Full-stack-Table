@@ -1,3 +1,4 @@
+'use client';
 import { useState, useCallback, useReducer } from 'react';
 import { Cell } from './components/Cell';
 import { Loading } from './components/Loading';
