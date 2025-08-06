@@ -40,8 +40,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        run: |
-          git checkout dev
+        run: git checkout dev
           git add .
           git commit -m "Automated deploy to dev"
           git push origin dev --force
