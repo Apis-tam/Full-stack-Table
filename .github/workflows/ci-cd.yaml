@@ -42,6 +42,8 @@ jobs:
         uses: actions/checkout@v3
         run: |
           git checkout dev
+          rm -rf ./*
+          cp -r out/* .
           git add .
           git commit -m "Automated deploy to dev"
           git push origin dev --force
@@ -54,8 +56,8 @@ jobs:
           username: ${{ secrets.EMAIL}}
           password: ${{ secrets.P }}
           subject: 'Successful Deployment to Dev - ${{ github.repository }}'
-          to: your-email@example.com
-          from: GitHub Actions <your-email@example.com>
+          to: bogdanapis@gmail.com
+          from: GitHub Actions <bogdanapis@gmail.com>
           body: 'The deployment to the dev environment for ${{ github.repository }} was successful. Commit: ${{ github.sha }}'
 
       - name: Send email notification on failure
@@ -67,6 +69,6 @@ jobs:
           username: ${{ secrets.EMAIL }}
           password: ${{ secrets.P }}
           subject: 'Failed Deployment to Dev - ${{ github.repository }}'
-          to: your-email@example.com
-          from: GitHub Actions <your-email@example.com>
+          to: bogdanapis@gmail.com
+          from: GitHub Actions <bogdanapis@gmail.com>
           body: 'The deployment to the dev environment for ${{ github.repository }} failed. Commit: ${{ github.sha }}. Please check the GitHub Actions logs for details.'
