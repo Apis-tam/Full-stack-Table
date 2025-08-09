@@ -42,7 +42,7 @@ jobs:
           git fetch origin dev
           git checkout dev
           rm -rf ./*
-          cp -r out/* .
+          cp -r .next/* .
           git add .
           git commit -m "Automated deploy to dev"
           git push origin dev --force
