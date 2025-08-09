@@ -1,3 +1,4 @@
+'use client';
 import { CellProps, Data } from '@/app/types/data';
 import { ChangeEvent, memo, useCallback } from 'react';
 import { Input } from '../Input';

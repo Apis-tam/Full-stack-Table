@@ -3,7 +3,7 @@ import { useState, useCallback, useReducer } from 'react';
 import { Cell } from './components/Cell';
 import { Loading } from './components/Loading';
 import { Table } from './components/Table';
-import { useTableData } from './Hooks/useTableReqests';
+import { useTableData } from './hooks/useTableReqests';
 
 import { Data } from './types/data';
 import { Button } from './components/Button';

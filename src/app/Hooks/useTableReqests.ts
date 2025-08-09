@@ -1,3 +1,4 @@
+'use client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createReq, deleteReq, getReq, updateReq } from '../services/table.service';
 import { toast } from 'react-toastify';

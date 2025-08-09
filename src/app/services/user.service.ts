@@ -1,3 +1,4 @@
+'use client';
 import { config } from '../../../envConfig';
 import { ApiError, AuthUserResponse, User } from '../types/data';
 

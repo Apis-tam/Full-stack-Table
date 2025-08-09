@@ -1,6 +1,6 @@
 'use client';
 
-import { TabParam, useAuth } from '../Hooks/useAuth';
+import { TabParam, useAuth } from '../hooks/useAuth';
 
 export const Auth = () => {
 	const { formAction, requeredFields, setActiveTab, activeTab } = useAuth();

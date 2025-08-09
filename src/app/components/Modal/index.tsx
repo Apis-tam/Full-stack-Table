@@ -1,3 +1,4 @@
+'use client';
 import React, { useRef } from 'react';
 import { Button } from '../Button';
 import { createPortal } from 'react-dom';

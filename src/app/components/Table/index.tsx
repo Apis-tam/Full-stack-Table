@@ -1,3 +1,4 @@
+'use client';
 import { CellProps, Data } from '@/app/types/data';
 
 import { memo, ReactNode } from 'react';

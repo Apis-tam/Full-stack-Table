@@ -1,3 +1,4 @@
+'use client';
 import { ButtonHTMLAttributes, memo, ReactNode } from 'react';
 
 type Props = { onClick?: () => void; className?: string; children: ReactNode; disabled?: boolean } & ButtonHTMLAttributes<HTMLButtonElement>;

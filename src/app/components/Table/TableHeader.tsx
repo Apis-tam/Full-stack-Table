@@ -1,3 +1,4 @@
+'use client';
 import { memo } from 'react';
 
 type Props = {
@@ -6,7 +7,6 @@ type Props = {
 	className?: string;
 };
 
-// eslint-disable-next-line react/display-name
 export const TableHeader = memo(({ columns, withEditColumns, className }: Props) => {
 	return (
 		<div className={`grid  justify-items-center align-items-center  bg-blue-600 gap-1 ${className} `}>
@@ -24,3 +24,4 @@ export const TableHeader = memo(({ columns, withEditColumns, className }: Props)
 		</div>
 	);
 });
+TableHeader.displayName = 'TableHeader';

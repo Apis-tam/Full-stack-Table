@@ -19,9 +19,10 @@ const errorResponse = (res: Response) => {
 	throw new Error(`Update request Error: ${res.status}, ${res.statusText}`);
 };
 
+const accessToken = window ? localStorage.getItem('accessToken') : '';
 const baseHeaders = {
 	'Content-Type': 'application/json',
-	Authorization: `Bearer ${typeof window !== 'undefined' ? localStorage.getItem('accessToken') : ''}`,
+	Authorization: `Bearer ${accessToken}`,
 	credentials: 'include',
 };
 
