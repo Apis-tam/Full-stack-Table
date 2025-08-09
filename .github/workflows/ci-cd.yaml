@@ -39,6 +39,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Deploy project to dev branch
         run: |
+          git fetch origin dev
           git checkout dev
           rm -rf ./*
           cp -r out/* .
