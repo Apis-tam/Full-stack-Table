@@ -55,7 +55,7 @@ export const TablePage = () => {
 	return (
 		<>
 			<div className='flex justify-end  items-center p-2 mb-3 w-[100%]'>
-				<p className='h-4 ml-2 mr-2'>Create new Row :</p>{' '}
+				<p className='h-4 ml-2 mr-2'>Create new Row :</p>
 				<Button className=' bg-emerald-600' onClick={toggleAddModal}>
 					Create
 				</Button>
