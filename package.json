@@ -6,7 +6,15 @@
 		"dev": "next dev --turbopack",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"type-check": "tsc --noEmit",
+		"prepare": "husky"
+	},
+	"lint-staged": {
+		"*.{ts,tsx}": [
+			"eslint --fix",
+			"tsc --noEmit"
+		]
 	},
 	"dependencies": {
 		"@tanstack/react-query": "^5.83.0",
@@ -26,6 +34,8 @@
 		"@types/react-dom": "^19",
 		"eslint": "^9",
 		"eslint-config-next": "15.4.1",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.1.5",
 		"tailwindcss": "^4",
 		"typescript": "^5"
 	}
