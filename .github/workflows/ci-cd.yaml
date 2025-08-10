@@ -73,9 +73,10 @@ jobs:
           git add .
           git commit -m "Automated deploy to dev"
           git push origin dev --force
+
       - name: Send email notification on success
         if: success()
-        uses: dawidd6/action-send-mail@v3
+        uses: dawidd6/action-send-mail@v6
         with:
           server_address: smtp.gmail.com
           server_port: 465
@@ -83,12 +84,12 @@ jobs:
           password: ${{ secrets.P }}
           subject: 'Successful Deployment to Dev - ${{ github.repository }}'
           to: bogdanapis@gmail.com
-          from: GitHub Actions <bogdanapis@gmail.com>
+          from: GitHub Actions Deploy Table project
           body: 'The deployment to the dev environment for ${{ github.repository }} was successful. Commit: ${{ github.sha }}'
 
       - name: Send email notification on failure
         if: failure()
-        uses: dawidd6/action-send-mail@v3
+        uses: dawidd6/action-send-mail@v6
         with:
           server_address: smtp.gmail.com
           server_port: 465
@@ -96,5 +97,5 @@ jobs:
           password: ${{ secrets.P }}
           subject: 'Failed Deployment to Dev - ${{ github.repository }}'
           to: bogdanapis@gmail.com
-          from: ${{ secrets.EMAIL }}
+          from: GitHub Actions Deploy Table project
           body: 'The deployment to the dev environment for ${{ github.repository }} failed. Commit: ${{ github.sha }}. Please check the GitHub Actions logs for details.'
