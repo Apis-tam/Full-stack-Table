@@ -51,6 +51,7 @@ jobs:
       - name: Deploy project to dev branch
         run: |
           git fetch origin dev
+          ls -la out
           git checkout dev
 
       - name: Download build artifact
@@ -63,8 +64,8 @@ jobs:
         run: |
           rm -rf ./*
           git rm -r -f . || true
-          ls -la .next
-          cp -r next/* .
+          ls -la out
+          cp -r out/* .
           git add .
           git commit -m "Automated deploy to dev"
           git push origin dev --force
