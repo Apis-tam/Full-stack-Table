@@ -32,9 +32,7 @@ jobs:
         run: npm run lint
 
       - name: Build project
-        run: |
-          npm run build
-          ls -la out
+        run: npm run build
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
@@ -50,16 +48,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy project to dev branch
-        run: |
-          git fetch origin dev
-          git checkout dev
-
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: build-artifact
           path: out
+
+      - name: Deploy project to dev branch
+        run: |
+          git fetch origin dev
+          git checkout dev
 
       - name: Copy build to branch
         run: |
