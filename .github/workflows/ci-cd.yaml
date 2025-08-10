@@ -48,21 +48,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Deploy project to dev branch
+        run: |
+          git fetch origin dev
+          git checkout dev
+
+      - name: Remove old files from dev branch
+        run: |
+          rm -rf ./*
+          git rm -r -f . || true
+
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: build-artifact
           path: out
 
-      - name: Deploy project to dev branch
-        run: |
-          git fetch origin dev
-          git checkout dev
-
       - name: Copy build to branch
         run: |
-          rm -rf ./*
-          git rm -r -f . || true
           ls -la out
           cp -r out/* .
           git add .
