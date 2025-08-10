@@ -66,6 +66,8 @@ jobs:
 
       - name: Copy build to branch
         run: |
+          git config --global user.email "bogdnapis@gmail.com"
+          git config --global user.name "apis"
           ls -la out
           cp -r out/* .
           git add .
