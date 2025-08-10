@@ -8,6 +8,10 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  actions: read
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -43,6 +47,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: Deploy project to dev branch
         run: |
           git fetch origin dev
@@ -58,6 +63,7 @@ jobs:
         run: |
           rm -rf ./*
           git rm -r -f . || true
+          ls -la out
           cp -r out/* .
           git add .
           git commit -m "Automated deploy to dev"
@@ -87,3 +93,4 @@ jobs:
           to: bogdanapis@gmail.com
           from: GitHub Actions <bogdanapis@gmail.com>
           body: 'The deployment to the dev environment for ${{ github.repository }} failed. Commit: ${{ github.sha }}. Please check the GitHub Actions logs for details.'
+#git push https://x-access-token:${{ secrets.ACCESS_TOKEN }}@github.com/${{ github.repository }}.git deploy
