@@ -63,7 +63,7 @@ jobs:
         run: |
           rm -rf ./*
           git rm -r -f . || true
-          ls -la out
+          ls -la .
           cp -r out/* .
           git add .
           git commit -m "Automated deploy to dev"
