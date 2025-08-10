@@ -96,6 +96,5 @@ jobs:
           password: ${{ secrets.P }}
           subject: 'Failed Deployment to Dev - ${{ github.repository }}'
           to: bogdanapis@gmail.com
-          from: GitHub Actions <bogdanapis@gmail.com>
+          from: ${{ secrets.EMAIL }}
           body: 'The deployment to the dev environment for ${{ github.repository }} failed. Commit: ${{ github.sha }}. Please check the GitHub Actions logs for details.'
-#git push https://x-access-token:${{ secrets.ACCESS_TOKEN }}@github.com/${{ github.repository }}.git deploy
