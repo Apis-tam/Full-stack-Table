@@ -1,6 +1,7 @@
 'use client';
 import { Application, Container, Sprite, Texture, Ticker, Graphics, Text } from 'pixi.js';
 
+// TO DO : make slot machine builder
 export class SlotGames {
   containerRef: HTMLDivElement | null = null;
   app: Application | null = null;
